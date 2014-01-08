@@ -1,3 +1,5 @@
+import javax.swing.plaf.SliderUI;
+
 import sopias2libraries.*;
 
 
@@ -47,25 +49,41 @@ public class Roboter extends CommunicationLibrary  {
 	}
 	
 	public void driveRobot(FieldSegment fieldSegment){
-		System.out.println("Roboter");
-		float x = Math.abs( (cStatus.x + 2500) - fieldSegment.getCenterX()   ); 
-		float y = Math.abs( (cStatus.y + 1500) -  fieldSegment.getCenterY()  );
-		float angle;
-		System.out.println(cStatus.x + " +2500 - " + fieldSegment.getCenterX() + " = " + x);
-		System.out.println("für x ist das ergebnis: " + x);
-		if (x == 0 ) {
-			angle = (float) 1.57;
-			System.out.println("agfjaödfklgjadflökjg " + x);
 		
-		} else {
-			angle = (float) Math.tan(y / x);
-			System.out.println("ok");
+		float x =  (cStatus.x + 2500) - fieldSegment.getCenterX()   ; 
+		float y =  (cStatus.y + 1500) -  fieldSegment.getCenterY()  ;
+		float angle = 0;
+		
+		
+		if (x > 0 && y > 0 ) {
+			angle = (float) Math.atan(y / x);
 		}
+		else if (x == 0 && y > 0) {
+			angle = (float) Math.PI / 2;
+		} 
+		else if (x < 0 && y > 0 ) {
+			angle = (float) (Math.PI - Math.atan(y / Math.abs(x)));
+		} 
+		else if (x < 0 && y == 0) {
+			angle = (float) Math.PI;
+		}
+		else if (x < 0 && y < 0) {
+			angle = (float) ((Math.PI) + Math.atan(Math.abs(y) / Math.abs(x)));
+		}
+		else if (x == 0 && y < 0) {
+			angle =  (float) (270 * Math.PI / 180);
+		}
+		else if (x > 0 && y < 0) {
+			angle = (float) ((270 * Math.PI / 180) + (Math.atan(x / Math.abs(y))));
+		}
+		else{
+			System.out.println("fehler bei der Berechnung des zu drehenden Winkels");
+		}
+
+		float deltaAngle = angle - cStatus.angle;		
 		 
-		float distance = (float) ((float) Math.sqrt(x * x + y * y) + 3.5);
-		System.out.println(angle);
-		System.out.println(distance + 3.5 );
-		System.out.println(rotateRobot(angle));
+		float distance = (float) ((float) Math.sqrt(Math.abs(x) * Math.abs(x) + Math.abs(y) * Math.abs(y)));
+		rotateRobot(deltaAngle);
 		driveRobot(distance);
 		getOwnStatus(cStatus);
 		calculateFieldPosition();

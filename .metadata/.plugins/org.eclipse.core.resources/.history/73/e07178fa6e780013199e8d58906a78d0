@@ -1,0 +1,20 @@
+import java.security.acl.Owner;
+
+
+public class TestMain {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+//		
+		Field f1 = new Field(11, 5);
+		f1.addOwnRoboter("192.168.102.128", 22222, -2480, -1480, 0);
+		f1.getOwnRoboter().connectRobot();
+		System.out.println(f1.getOwnRoboter());
+		
+		
+	}
+
+}
