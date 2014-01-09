@@ -1,12 +1,13 @@
 import java.security.acl.Owner;
+import java.util.LinkedList;
 
 
 public class TestMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		Field f1 = new Field(3, 3);
+		LinkedList<E>
+		Field f1 = new Field(5, 5);
 //		f1.addOwnRoboter("127.0.0.1", 22223, 0, 100, 0);
 //		f1.getOwnRoboter().connectRobot();
 //		System.out.println(f1.getOwnRoboter());

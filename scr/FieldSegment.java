@@ -9,12 +9,14 @@ public class FieldSegment {
 	public boolean visited;
 	final private float centerX;
 	final private float centerY;
-	private int heuristic; //geschätzter weg Knoten->Ziel
-	private int range; //weg Start->Knoten
-	private int comefrom;
+	private float heuristic; //geschätzter weg Knoten->Ziel
+	private float range; //weg Start->Knoten
+	private int[][] comefrom;
+	final private boolean finishSegment;
 	
-	public FieldSegment(int id, int positionColum, int positionLine, float centerX, float centerY){
+	public FieldSegment(int id, int positionColum, int positionLine, float centerX, float centerY, boolean finishSegment){
 		this.id = id;
+		this.finishSegment = finishSegment;
 		this.positionLine = positionLine;
 		this.positionColum = positionColum;
 		this.centerX = centerX;
@@ -24,7 +26,7 @@ public class FieldSegment {
 
 	
 
-	public int getHeuristic() {
+	public float getHeuristic() {
 		return heuristic;
 	}
 
@@ -32,7 +34,7 @@ public class FieldSegment {
 		this.heuristic = heuristic;
 	}
 
-	public int getRange() {
+	public float getRange() {
 		return range;
 	}
 
@@ -40,11 +42,11 @@ public class FieldSegment {
 		this.range = range;
 	}
 
-	public int getComefrom() {
+	public int[][] getComefrom() {
 		return comefrom;
 	}
 
-	public void setComefrom(int comefrom) {
+	public void setComefrom(int[][] comefrom) {
 		this.comefrom = comefrom;
 	}
 
@@ -56,7 +58,7 @@ public class FieldSegment {
 		return centerY;
 	}
 	
-	public int getValue(){
+	public float getValue(){
 		return heuristic + range;
 	}
 
